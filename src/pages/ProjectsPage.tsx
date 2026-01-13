@@ -46,10 +46,56 @@ import { usePageAnimation, useHoverAnimation } from '@/hooks/useGsapAnimations';
 import gsap from 'gsap';
 
 const TECHNOLOGIES = [
-  'React', 'TypeScript', 'JavaScript', 'Node.js', 'Python', 'Vue.js', 'Angular',
-  'React Native', 'Swift', 'Kotlin', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis',
-  'AWS', 'Docker', 'Kubernetes', 'GraphQL', 'FastAPI', 'Django', 'Laravel',
+  // Frontend
+  'HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Vue.js',
+  'Angular', 'Svelte', 'Tailwind CSS', 'Bootstrap', 'Material UI',
+  'Chakra UI', 'ShadCN UI', 'SCSS', 'Three.js', 'Framer Motion',
+  'GSAP', 'Swiper.js', 'Lenis', 'Locomotive Scroll',
+
+  // Mobile
+  'React Native', 'Flutter', 'Expo', 'Swift', 'Kotlin',
+  'Jetpack Compose', 'Android', 'iOS',
+
+  // Backend
+  'Node.js', 'Express.js', 'NestJS', 'Python', 'Django',
+  'FastAPI', 'Flask', 'PHP', 'Laravel', 'Spring Boot',
+  'REST API', 'GraphQL', 'WebSockets', 'Microservices',
+
+  // Databases
+  'MongoDB', 'MySQL', 'PostgreSQL', 'SQLite',
+  'Firebase', 'Supabase', 'Redis', 'DynamoDB',
+
+  // Cloud & DevOps
+  'AWS', 'Google Cloud', 'Azure',
+  'Docker', 'Kubernetes', 'Terraform',
+  'CI/CD', 'GitHub Actions', 'Vercel',
+  'Netlify', 'Render', 'Railway', 'Nginx',
+
+  // AI / ML
+  'OpenAI API', 'Gemini API', 'LangChain',
+  'TensorFlow', 'PyTorch', 'Hugging Face',
+  'Computer Vision', 'NLP', 'AI Chatbots',
+
+  // Tools
+  'Git', 'GitHub', 'GitLab',
+  'Postman', 'Insomnia',
+  'Figma', 'Canva', 'Adobe XD',
+  'VS Code', 'Jira', 'Notion',
+
+  // Security & Auth
+  'JWT', 'OAuth', 'Firebase Auth',
+  'Clerk', 'Auth0', 'API Security',
+
+  // Testing
+  'Jest', 'Playwright', 'Cypress',
+  'Vitest', 'E2E Testing',
+
+  // Architecture & Performance
+  'System Design', 'Clean Architecture',
+  'SEO Optimization', 'Web Performance',
+  'Code Splitting', 'Lazy Loading'
 ];
+
 
 const STATUS_OPTIONS = [
   { value: 'active', label: 'Active', color: 'success', icon: <PlayArrow /> },
