@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* WorkLedger Design System - Professional SaaS Theme */
+/* WorkLedger Design System - Modern Indian Market Premium Theme */
 
 @layer base {
   :root {
@@ -154,7 +156,45 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  h5 {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
   }
   
   /* Theme transition for dark mode toggle */
@@ -192,33 +232,34 @@
 }
 
 @layer components {
-  /* Card styles */
+  /* Card styles - Modern premium look */
   .workledger-card {
-    @apply rounded-xl bg-card border border-border;
-    box-shadow: var(--shadow-card);
-    transition: all 0.3s ease;
+    @apply rounded-2xl bg-card border border-border;
+    box-shadow: 0 2px 8px hsl(222 47% 11% / 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .workledger-card:hover {
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 12px 24px hsl(222 47% 11% / 0.12);
+    transform: translateY(-2px);
   }
   
   /* Stat card */
   .stat-card {
-    @apply workledger-card p-6;
+    @apply workledger-card p-6 space-y-3;
   }
   
-  /* Button styles */
+  /* Button styles - Smooth interactions */
   .btn-primary {
     background: var(--gradient-primary);
-    @apply text-primary-foreground px-6 py-2.5 rounded-lg font-medium;
-    box-shadow: var(--shadow-md), var(--shadow-glow);
-    transition: all 0.2s ease;
+    @apply text-primary-foreground px-6 py-3 rounded-xl font-semibold;
+    box-shadow: 0 4px 12px hsl(173 80% 40% / 0.25);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px hsl(173 80% 40% / 0.35);
   }
   
   .btn-primary:active {
@@ -226,29 +267,35 @@
   }
   
   .btn-secondary {
-    @apply bg-secondary text-secondary-foreground px-6 py-2.5 rounded-lg font-medium border border-border;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.2s ease;
+    @apply bg-secondary text-secondary-foreground px-6 py-3 rounded-xl font-semibold border border-border;
+    box-shadow: 0 2px 6px hsl(222 47% 11% / 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .btn-secondary:hover {
-    @apply bg-muted;
-    box-shadow: var(--shadow-md);
+    @apply bg-muted border-primary/30;
+    box-shadow: 0 4px 12px hsl(222 47% 11% / 0.12);
+    transform: translateY(-1px);
   }
   
-  /* Input styles */
+  /* Input styles - Clean modern design */
   .input-field {
-    @apply w-full px-4 py-3 rounded-lg bg-background border border-input;
-    transition: all 0.2s ease;
+    @apply w-full px-4 py-3 rounded-lg bg-background border border-input text-base;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
   }
   
   .input-field:focus {
-    @apply outline-none border-primary ring-2 ring-primary/20;
+    @apply outline-none border-primary ring-2 ring-primary/20 bg-background;
+  }
+  
+  .input-field::placeholder {
+    color: hsl(var(--muted-foreground) / 0.6);
   }
   
   /* Badge styles */
   .badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold;
   }
   
   .badge-primary {
@@ -275,30 +322,34 @@
     color: hsl(var(--info));
   }
   
-  /* Table styles */
+  /* Table styles - Premium appearance */
   .data-table {
     @apply w-full;
   }
   
   .data-table th {
-    @apply px-4 py-3 text-left text-sm font-medium text-muted-foreground bg-muted/50;
+    @apply px-4 py-4 text-left text-sm font-semibold text-muted-foreground bg-muted/40 uppercase tracking-wider;
+    border-bottom: 2px solid hsl(var(--border));
   }
   
   .data-table td {
-    @apply px-4 py-4 text-sm border-t border-border;
+    @apply px-4 py-4 text-sm border-b border-border;
   }
   
   .data-table tr:hover td {
-    @apply bg-muted/30;
+    @apply bg-muted/30 transition-colors duration-200;
   }
   
   /* Sidebar styles */
   .sidebar-item {
-    @apply flex items-center gap-3 px-4 py-2.5 rounded-lg text-sidebar-foreground/80 transition-all duration-200;
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-sidebar-foreground/80 transition-all duration-300;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
   }
   
   .sidebar-item:hover {
     @apply bg-sidebar-accent text-sidebar-accent-foreground;
+    transform: translateX(4px);
   }
   
   .sidebar-item.active {

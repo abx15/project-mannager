@@ -116,9 +116,9 @@ export function WorkersPage() {
   );
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: settings.currency,
+      currency: 'INR',
       minimumFractionDigits: 0,
     }).format(amount);
   };
@@ -521,7 +521,7 @@ export function WorkersPage() {
               fullWidth
               value={formData.monthlySalary}
               onChange={(e) => setFormData({ ...formData, monthlySalary: e.target.value })}
-              InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+              InputProps={{ startAdornment: <InputAdornment position="start">₹</InputAdornment> }}
             />
             <FormControl fullWidth>
               <InputLabel>Assign Projects</InputLabel>

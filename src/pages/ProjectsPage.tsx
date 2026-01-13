@@ -457,7 +457,7 @@ export function ProjectsPage() {
                 type="number"
                 value={formData.budget}
                 onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+                InputProps={{ startAdornment: <InputAdornment position="start">₹</InputAdornment> }}
                 sx={{ flex: 1 }}
               />
               <TextField

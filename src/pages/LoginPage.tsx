@@ -78,7 +78,7 @@ export function LoginPage() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(135deg, hsl(222, 47%, 11%) 0%, hsl(222, 40%, 18%) 100%)',
+        background: 'linear-gradient(135deg, hsl(222, 47%, 8%) 0%, hsl(173, 60%, 25%) 100%)',
         p: 2,
       }}
     >
@@ -86,31 +86,34 @@ export function LoginPage() {
         ref={cardRef}
         sx={{
           width: '100%',
-          maxWidth: 440,
-          p: { xs: 3, sm: 4 },
+          maxWidth: 460,
+          p: { xs: 4, sm: 5 },
+          borderRadius: 3,
+          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
         }}
       >
         {/* Logo */}
-        <Box sx={{ textAlign: 'center', mb: 4 }}>
+        <Box sx={{ textAlign: 'center', mb: 5 }}>
           <Typography
-            variant="h4"
+            variant="h3"
             sx={{
-              fontWeight: 700,
+              fontWeight: 800,
               background: 'linear-gradient(135deg, hsl(173, 80%, 40%), hsl(195, 80%, 45%))',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              mb: 1,
+              mb: 1.5,
+              fontFamily: 'Poppins, sans-serif',
             }}
           >
             WorkLedger
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Project & Team Management
+          <Typography variant="body1" color="text.secondary" sx={{ fontWeight: 500, letterSpacing: '0.5px' }}>
+            Professional Project & Team Management
           </Typography>
         </Box>
 
         {error && (
-          <Alert severity="error" sx={{ mb: 3 }}>
+          <Alert severity="error" sx={{ mb: 3, borderRadius: 2 }}>
             {error}
           </Alert>
         )}
@@ -118,12 +121,22 @@ export function LoginPage() {
         <form onSubmit={handleSubmit}>
           <TextField
             fullWidth
-            label="Email"
+            label="Email Address"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            sx={{ mb: 2.5 }}
+            variant="outlined"
+            sx={{
+              mb: 3,
+              '& .MuiOutlinedInput-root': {
+                borderRadius: 2,
+                fontSize: '0.95rem',
+              },
+              '& .MuiInputLabel-root': {
+                fontWeight: 500,
+              },
+            }}
           />
           <TextField
             fullWidth
@@ -132,11 +145,28 @@ export function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            sx={{ mb: 3 }}
+            variant="outlined"
+            sx={{
+              mb: 3.5,
+              '& .MuiOutlinedInput-root': {
+                borderRadius: 2,
+                fontSize: '0.95rem',
+              },
+              '& .MuiInputLabel-root': {
+                fontWeight: 500,
+              },
+            }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
+                  <IconButton
+                    onClick={() => setShowPassword(!showPassword)}
+                    edge="end"
+                    sx={{
+                      color: 'text.secondary',
+                      '&:hover': { bgcolor: 'action.hover' },
+                    }}
+                  >
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
@@ -151,10 +181,19 @@ export function LoginPage() {
             disabled={loading}
             startIcon={<LoginIcon />}
             sx={{
-              py: 1.5,
+              py: 1.8,
+              fontSize: '1rem',
+              fontWeight: 600,
+              borderRadius: 2,
               background: 'linear-gradient(135deg, hsl(173, 80%, 40%), hsl(195, 80%, 45%))',
+              textTransform: 'none',
+              boxShadow: '0 8px 20px rgba(173, 80%, 40%, 0.3)',
               '&:hover': {
                 background: 'linear-gradient(135deg, hsl(173, 80%, 35%), hsl(195, 80%, 40%))',
+                boxShadow: '0 12px 28px rgba(173, 80%, 40%, 0.4)',
+              },
+              '&:disabled': {
+                background: 'linear-gradient(135deg, hsl(215, 16%, 47%), hsl(215, 16%, 60%))',
               },
             }}
           >
@@ -163,41 +202,51 @@ export function LoginPage() {
         </form>
 
         {/* Demo credentials */}
-        <Box sx={{ mt: 4, pt: 3, borderTop: 1, borderColor: 'divider' }}>
+        <Box sx={{ mt: 5, pt: 4, borderTop: '1px solid', borderColor: 'divider' }}>
           <Typography
-            variant="caption"
+            variant="body2"
             color="text.secondary"
-            sx={{ display: 'block', textAlign: 'center', mb: 2 }}
+            sx={{
+              display: 'block',
+              textAlign: 'center',
+              mb: 3,
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              letterSpacing: '1px',
+              fontSize: '0.8rem',
+            }}
           >
             Demo Credentials
           </Typography>
-          <Box sx={{ display: 'flex', gap: 1.5 }}>
-            {/* <Button
-              variant="outlined"
-              size="small"
-              fullWidth
-              onClick={() => fillCredentials('admin')}
-              sx={{ fontSize: '0.75rem' }}
-            >
-              Admin Login
-            </Button> */}
+          <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
             <Button
               variant="outlined"
               size="small"
               fullWidth
               onClick={() => fillCredentials('user')}
-              sx={{ fontSize: '0.75rem' }}
+              sx={{
+                fontSize: '0.9rem',
+                fontWeight: 600,
+                borderRadius: 1.5,
+                py: 1.2,
+                textTransform: 'none',
+                borderColor: 'primary.main',
+                color: 'primary.main',
+                '&:hover': {
+                  bgcolor: 'primary.main',
+                  color: 'white',
+                },
+              }}
             >
-              User Login
+              Quick Login
             </Button>
           </Box>
-          <Box sx={{ mt: 2, textAlign: 'center' }}>
-            {/* <Typography variant="caption" color="text.secondary">
-              Admin: admin@workledger.com / admin123
-            </Typography> */}
-            <br />
+          <Box sx={{ textAlign: 'center', p: 2, bgcolor: 'action.hover', borderRadius: 2 }}>
+            <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 0.5 }}>
+              Email: user@workledger.com
+            </Typography>
             <Typography variant="caption" color="text.secondary">
-              User: user@workledger.com / user123
+              Password: user123
             </Typography>
           </Box>
         </Box>
