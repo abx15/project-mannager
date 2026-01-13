@@ -146,9 +146,9 @@ export function AnalyticsPage() {
   const chartsRef3 = useSectionReveal();
 
   const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: settings.currency,
+      currency: 'INR',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(value);

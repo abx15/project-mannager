@@ -67,9 +67,9 @@ export function SalaryPage() {
   }, []);
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: settings.currency,
+      currency: 'INR',
       minimumFractionDigits: 0,
     }).format(amount);
   };
@@ -408,7 +408,7 @@ export function SalaryPage() {
             value={newSalary}
             onChange={(e) => setNewSalary(e.target.value)}
             InputProps={{
-              startAdornment: <InputAdornment position="start">$</InputAdornment>,
+              startAdornment: <InputAdornment position="start">₹</InputAdornment>,
             }}
           />
         </DialogContent>

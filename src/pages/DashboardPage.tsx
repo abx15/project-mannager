@@ -100,9 +100,9 @@ export function DashboardPage() {
   const projectCosts = getProjectCosts();
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: settings.currency,
+      currency: 'INR',
       minimumFractionDigits: 0,
     }).format(amount);
   };
