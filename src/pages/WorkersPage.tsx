@@ -53,11 +53,61 @@ import { usePageAnimation, useTableRowAnimation } from '@/hooks/useGsapAnimation
 import gsap from 'gsap';
 
 const SKILLS = [
-  'React', 'TypeScript', 'JavaScript', 'Node.js', 'Python', 'Vue.js', 'Angular',
-  'React Native', 'Swift', 'Kotlin', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis',
-  'AWS', 'Docker', 'Kubernetes', 'GraphQL', 'FastAPI', 'Django', 'Figma', 'CSS',
-  'Firebase', 'CI/CD', 'Terraform', 'User Research', 'Prototyping',
+  // Frontend
+  'HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Vue.js',
+  'Angular', 'Svelte', 'Tailwind CSS', 'Bootstrap', 'Material UI', 'Chakra UI',
+  'ShadCN UI', 'SCSS', 'Styled Components', 'Three.js', 'Framer Motion',
+  'GSAP', 'Swiper.js', 'Lenis', 'Locomotive Scroll',
+
+  // Mobile App
+  'React Native', 'Flutter', 'Expo', 'Swift', 'Kotlin', 'Jetpack Compose',
+  'Android Studio', 'iOS Development',
+
+  // Backend
+  'Node.js', 'Express.js', 'NestJS', 'Python', 'Django', 'FastAPI',
+  'Flask', 'PHP', 'Laravel', 'Spring Boot', 'REST APIs', 'GraphQL',
+  'WebSockets', 'Microservices',
+
+  // Databases
+  'MongoDB', 'MySQL', 'PostgreSQL', 'SQLite', 'Firebase', 'Supabase',
+  'Redis', 'DynamoDB',
+
+  // DevOps & Cloud
+  'AWS', 'Google Cloud', 'Azure', 'Docker', 'Kubernetes',
+  'CI/CD', 'GitHub Actions', 'Terraform', 'Vercel', 'Netlify',
+  'Railway', 'Render', 'Nginx',
+
+  // AI / ML
+  'OpenAI API', 'Gemini API', 'LangChain', 'TensorFlow',
+  'PyTorch', 'Hugging Face', 'Computer Vision', 'NLP',
+  'Chatbot Development', 'AI Integrations',
+
+  // Tools
+  'Git', 'GitHub', 'GitLab', 'Postman', 'Insomnia',
+  'Figma', 'Canva', 'Adobe XD', 'VS Code',
+  'Jira', 'Notion', 'Trello',
+
+  // Security & Auth
+  'JWT', 'OAuth', 'Firebase Auth', 'Clerk', 'Auth0',
+  'Encryption', 'API Security',
+
+  // Testing
+  'Jest', 'Playwright', 'Cypress', 'Vitest',
+  'Unit Testing', 'E2E Testing',
+
+  // UI/UX
+  'User Research', 'Wireframing', 'Prototyping',
+  'UX Design', 'Accessibility (a11y)',
+
+  // Performance
+  'SEO Optimization', 'Web Performance', 'Lazy Loading',
+  'Code Splitting', 'Lighthouse',
+
+  // Misc
+  'Agile', 'Scrum', 'System Design', 'Clean Architecture',
+  'API Documentation', 'Technical Writing'
 ];
+
 
 const ROLES = [
   'Frontend Developer',
@@ -383,8 +433,8 @@ export function WorkersPage() {
             </TableHead>
             <TableBody>
               {filteredWorkers.map((worker) => (
-                <TableRow 
-                  key={worker.id} 
+                <TableRow
+                  key={worker.id}
                   data-animate="table-row"
                   sx={{
                     cursor: 'pointer',
