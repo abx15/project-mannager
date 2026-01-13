@@ -1,9 +1,18 @@
-/* WorkLedger Hub - Application Styles */
+/* WorkLedger Hub - Application Styles with Mobile-First Responsiveness */
 
 #root {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  #root {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
 }
 
 /* Utility Classes */
@@ -65,10 +74,207 @@ html {
   font-weight: 700;
 }
 
-/* Responsive Breakpoints */
-@media (max-width: 768px) {
-  #root {
-    height: auto;
-    min-height: 100vh;
+/* ========================================
+   MOBILE-FIRST RESPONSIVE LAYOUTS
+   ======================================== */
+
+/* Container responsive utilities */
+.container {
+  width: 100%;
+  padding: 0 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 481px) {
+  .container {
+    padding: 0 24px;
   }
 }
+
+@media (min-width: 769px) {
+  .container {
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .container {
+    max-width: 1400px;
+    padding: 0 40px;
+  }
+}
+
+/* Responsive grid utilities */
+.grid-responsive {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 481px) {
+  .grid-responsive {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (min-width: 769px) {
+  .grid-responsive {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .grid-responsive {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+}
+
+/* Flex responsive utilities */
+.flex-responsive {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (min-width: 481px) {
+  .flex-responsive {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
+@media (min-width: 769px) {
+  .flex-responsive {
+    flex-wrap: nowrap;
+  }
+}
+
+/* Responsive card padding */
+.card-responsive {
+  padding: 16px;
+}
+
+@media (min-width: 481px) {
+  .card-responsive {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 769px) {
+  .card-responsive {
+    padding: 24px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .card-responsive {
+    padding: 28px;
+  }
+}
+
+/* Responsive typography */
+.text-responsive-lg {
+  font-size: 1.25rem;
+}
+
+@media (max-width: 480px) {
+  .text-responsive-lg {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .text-responsive-lg {
+    font-size: 1.5rem;
+  }
+}
+
+.text-responsive-md {
+  font-size: 1rem;
+}
+
+@media (max-width: 480px) {
+  .text-responsive-md {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .text-responsive-md {
+    font-size: 1.1rem;
+  }
+}
+
+/* Responsive spacing utilities */
+.p-responsive-sm {
+  padding: 8px;
+}
+
+@media (min-width: 481px) {
+  .p-responsive-sm {
+    padding: 12px;
+  }
+}
+
+@media (min-width: 769px) {
+  .p-responsive-sm {
+    padding: 16px;
+  }
+}
+
+.p-responsive-md {
+  padding: 16px;
+}
+
+@media (min-width: 481px) {
+  .p-responsive-md {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 769px) {
+  .p-responsive-md {
+    padding: 24px;
+  }
+}
+
+/* Responsive margin utilities */
+.gap-responsive {
+  gap: 12px;
+}
+
+@media (min-width: 481px) {
+  .gap-responsive {
+    gap: 16px;
+  }
+}
+
+@media (min-width: 769px) {
+  .gap-responsive {
+    gap: 20px;
+  }
+}
+
+/* Mobile menu toggle utilities */
+@media (max-width: 768px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+
+  .show-on-mobile {
+    display: block !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .show-on-mobile {
+    display: none !important;
+  }
+}
+
+

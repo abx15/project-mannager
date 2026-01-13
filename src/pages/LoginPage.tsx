@@ -76,28 +76,53 @@ export function LoginPage() {
         minHeight: '100vh',
         width: '100%',
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         background: 'linear-gradient(135deg, hsl(222, 47%, 8%) 0%, hsl(173, 60%, 25%) 100%)',
-        p: 2,
+        p: { xs: 1.5, sm: 2, md: 2 },
+        gap: 2,
       }}
     >
+      {/* Desktop Notice - Only visible on larger screens */}
+      <Box
+        sx={{
+          display: 'none',
+          '@media (min-width: 769px)': {
+            display: 'flex',
+          },
+          maxWidth: 500,
+          p: 2,
+          bgcolor: 'rgba(255, 255, 255, 0.1)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          borderRadius: 2,
+          backdropFilter: 'blur(10px)',
+          color: 'white',
+          textAlign: 'center',
+          fontSize: '0.9rem',
+          fontWeight: 500,
+        }}
+      >
+        💡 For optimal experience, please open this application on a desktop or laptop
+      </Box>
+
       <Card
         ref={cardRef}
         sx={{
           width: '100%',
-          maxWidth: 460,
-          p: { xs: 4, sm: 5 },
-          borderRadius: 3,
+          maxWidth: { xs: '95vw', sm: '420px', md: 460 },
+          p: { xs: 2.5, sm: 4, md: 5 },
+          borderRadius: { xs: 2, sm: 3 },
           boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
         }}
       >
         {/* Logo */}
-        <Box sx={{ textAlign: 'center', mb: 5 }}>
+        <Box sx={{ textAlign: 'center', mb: { xs: 4, sm: 5 } }}>
           <Typography
             variant="h3"
             sx={{
               fontWeight: 800,
+              fontSize: { xs: '1.75rem', sm: '2.2rem', md: '2.2rem' },
               background: 'linear-gradient(135deg, hsl(173, 80%, 40%), hsl(195, 80%, 45%))',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -107,13 +132,28 @@ export function LoginPage() {
           >
             WorkLedger
           </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ fontWeight: 500, letterSpacing: '0.5px' }}>
+          <Typography 
+            variant="body1" 
+            color="text.secondary" 
+            sx={{ 
+              fontWeight: 500, 
+              letterSpacing: '0.5px',
+              fontSize: { xs: '0.85rem', sm: '0.95rem' },
+            }}
+          >
             Professional Project & Team Management
           </Typography>
         </Box>
 
         {error && (
-          <Alert severity="error" sx={{ mb: 3, borderRadius: 2 }}>
+          <Alert 
+            severity="error" 
+            sx={{ 
+              mb: 3, 
+              borderRadius: 2,
+              fontSize: { xs: '0.8rem', sm: '0.9rem' },
+            }}
+          >
             {error}
           </Alert>
         )}
@@ -128,13 +168,15 @@ export function LoginPage() {
             required
             variant="outlined"
             sx={{
-              mb: 3,
+              mb: 2.5,
               '& .MuiOutlinedInput-root': {
                 borderRadius: 2,
-                fontSize: '0.95rem',
+                fontSize: { xs: '0.9rem', sm: '0.95rem' },
+                padding: '10px 14px',
               },
               '& .MuiInputLabel-root': {
                 fontWeight: 500,
+                fontSize: { xs: '0.85rem', sm: '0.9rem' },
               },
             }}
           />
@@ -147,13 +189,15 @@ export function LoginPage() {
             required
             variant="outlined"
             sx={{
-              mb: 3.5,
+              mb: { xs: 3, sm: 3.5 },
               '& .MuiOutlinedInput-root': {
                 borderRadius: 2,
-                fontSize: '0.95rem',
+                fontSize: { xs: '0.9rem', sm: '0.95rem' },
+                padding: '10px 14px',
               },
               '& .MuiInputLabel-root': {
                 fontWeight: 500,
+                fontSize: { xs: '0.85rem', sm: '0.9rem' },
               },
             }}
             InputProps={{
@@ -165,6 +209,7 @@ export function LoginPage() {
                     sx={{
                       color: 'text.secondary',
                       '&:hover': { bgcolor: 'action.hover' },
+                      padding: '8px',
                     }}
                   >
                     {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -181,13 +226,14 @@ export function LoginPage() {
             disabled={loading}
             startIcon={<LoginIcon />}
             sx={{
-              py: 1.8,
-              fontSize: '1rem',
+              py: { xs: 1.5, sm: 1.8 },
+              fontSize: { xs: '0.9rem', sm: '1rem' },
               fontWeight: 600,
               borderRadius: 2,
               background: 'linear-gradient(135deg, hsl(173, 80%, 40%), hsl(195, 80%, 45%))',
               textTransform: 'none',
               boxShadow: '0 8px 20px rgba(173, 80%, 40%, 0.3)',
+              minHeight: '44px',
               '&:hover': {
                 background: 'linear-gradient(135deg, hsl(173, 80%, 35%), hsl(195, 80%, 40%))',
                 boxShadow: '0 12px 28px rgba(173, 80%, 40%, 0.4)',
@@ -202,34 +248,35 @@ export function LoginPage() {
         </form>
 
         {/* Demo credentials */}
-        <Box sx={{ mt: 5, pt: 4, borderTop: '1px solid', borderColor: 'divider' }}>
+        <Box sx={{ mt: { xs: 4, sm: 5 }, pt: { xs: 3, sm: 4 }, borderTop: '1px solid', borderColor: 'divider' }}>
           <Typography
             variant="body2"
             color="text.secondary"
             sx={{
               display: 'block',
               textAlign: 'center',
-              mb: 3,
+              mb: 2.5,
               fontWeight: 600,
               textTransform: 'uppercase',
               letterSpacing: '1px',
-              fontSize: '0.8rem',
+              fontSize: { xs: '0.7rem', sm: '0.8rem' },
             }}
           >
             Demo Credentials
           </Typography>
-          <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
+          <Box sx={{ display: 'flex', gap: 1.5, mb: 2.5 }}>
             <Button
               variant="outlined"
               size="small"
               fullWidth
               onClick={() => fillCredentials('user')}
               sx={{
-                fontSize: '0.9rem',
+                fontSize: { xs: '0.8rem', sm: '0.9rem' },
                 fontWeight: 600,
                 borderRadius: 1.5,
-                py: 1.2,
+                py: { xs: 1, sm: 1.2 },
                 textTransform: 'none',
+                minHeight: '40px',
                 borderColor: 'primary.main',
                 color: 'primary.main',
                 '&:hover': {
@@ -241,11 +288,25 @@ export function LoginPage() {
               Quick Login
             </Button>
           </Box>
-          <Box sx={{ textAlign: 'center', p: 2, bgcolor: 'action.hover', borderRadius: 2 }}>
-            <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 0.5 }}>
+          <Box sx={{ textAlign: 'center', p: { xs: 1.5, sm: 2 }, bgcolor: 'action.hover', borderRadius: 2 }}>
+            <Typography 
+              variant="caption" 
+              color="text.secondary" 
+              sx={{ 
+                display: 'block', 
+                mb: 0.5,
+                fontSize: { xs: '0.7rem', sm: '0.8rem' },
+              }}
+            >
               Email: user@workledger.com
             </Typography>
-            <Typography variant="caption" color="text.secondary">
+            <Typography 
+              variant="caption" 
+              color="text.secondary"
+              sx={{
+                fontSize: { xs: '0.7rem', sm: '0.8rem' },
+              }}
+            >
               Password: user123
             </Typography>
           </Box>

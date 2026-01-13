@@ -180,8 +180,21 @@ export function ProjectsPage() {
   return (
     <Box ref={containerRef} sx={{ width: '100%' }}>
       {/* Header */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3, flexWrap: 'wrap', gap: 2 }}>
-        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', flex: 1 }}>
+      <Box sx={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'flex-start', 
+        mb: { xs: 2, sm: 3 }, 
+        flexWrap: 'wrap', 
+        gap: { xs: 1.5, sm: 2 },
+      }}>
+        <Box sx={{ 
+          display: 'flex', 
+          gap: { xs: 1, sm: 2 }, 
+          flexWrap: 'wrap', 
+          flex: 1,
+          width: '100%',
+        }}>
           <TextField
             placeholder="Search projects..."
             size="small"
@@ -190,18 +203,32 @@ export function ProjectsPage() {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <Search sx={{ color: 'text.secondary' }} />
+                  <Search sx={{ color: 'text.secondary', fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
                 </InputAdornment>
               ),
             }}
-            sx={{ minWidth: 250 }}
+            sx={{ 
+              flex: 1,
+              minWidth: { xs: '100%', sm: '200px' },
+              '& .MuiOutlinedInput-root': {
+                fontSize: { xs: '0.85rem', sm: '0.95rem' },
+              },
+            }}
           />
-          <FormControl size="small" sx={{ minWidth: 150 }}>
+          <FormControl size="small" sx={{ 
+            minWidth: { xs: '100%', sm: '150px' },
+            '& .MuiInputLabel-root': {
+              fontSize: { xs: '0.85rem', sm: '0.95rem' },
+            },
+          }}>
             <InputLabel>Status</InputLabel>
             <Select
               value={statusFilter}
               label="Status"
               onChange={(e) => setStatusFilter(e.target.value)}
+              sx={{
+                fontSize: { xs: '0.85rem', sm: '0.95rem' },
+              }}
             >
               <MenuItem value="">All</MenuItem>
               {STATUS_OPTIONS.map((option) => (
@@ -212,7 +239,12 @@ export function ProjectsPage() {
             </Select>
           </FormControl>
         </Box>
-        <Box sx={{ display: 'flex', gap: 1 }}>
+        <Box sx={{ 
+          display: 'flex', 
+          gap: { xs: 0.5, sm: 1 },
+          flexWrap: 'wrap',
+          width: { xs: '100%', sm: 'auto' },
+        }}>
           {isAdmin && (
             <>
               <Button
@@ -220,6 +252,13 @@ export function ProjectsPage() {
                 startIcon={<Download />}
                 onClick={() => exportToCSV(projects, 'projects')}
                 size="small"
+                sx={{
+                  fontSize: { xs: '0.75rem', sm: '0.9rem' },
+                  py: { xs: 0.8, sm: 1 },
+                  px: { xs: 1, sm: 1.5 },
+                  minHeight: '36px',
+                  flex: { xs: 1, sm: 'auto' },
+                }}
               >
                 CSV
               </Button>
@@ -228,6 +267,13 @@ export function ProjectsPage() {
                 startIcon={<Download />}
                 onClick={() => exportToJSON(projects, 'projects')}
                 size="small"
+                sx={{
+                  fontSize: { xs: '0.75rem', sm: '0.9rem' },
+                  py: { xs: 0.8, sm: 1 },
+                  px: { xs: 1, sm: 1.5 },
+                  minHeight: '36px',
+                  flex: { xs: 1, sm: 'auto' },
+                }}
               >
                 JSON
               </Button>
@@ -237,6 +283,11 @@ export function ProjectsPage() {
                 onClick={() => handleOpenDialog()}
                 sx={{
                   background: 'linear-gradient(135deg, hsl(173, 80%, 40%), hsl(195, 80%, 45%))',
+                  fontSize: { xs: '0.75rem', sm: '0.9rem' },
+                  py: { xs: 0.8, sm: 1 },
+                  px: { xs: 1.5, sm: 2 },
+                  minHeight: '36px',
+                  flex: { xs: 1, sm: 'auto' },
                   '&:hover': {
                     background: 'linear-gradient(135deg, hsl(173, 80%, 35%), hsl(195, 80%, 40%))',
                   },
@@ -250,7 +301,7 @@ export function ProjectsPage() {
       </Box>
 
       {/* Projects Grid */}
-      <Grid container spacing={3} ref={gridRef}>
+      <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} ref={gridRef}>
         {filteredProjects.map((project) => {
           const projectWorkers = project.assignedWorkers
             .map((wId) => getWorkerById(wId))
@@ -261,7 +312,7 @@ export function ProjectsPage() {
               <Card
                 onClick={() => navigate(`/projects/${project.id}`)}
                 sx={{
-                  p: 3,
+                  p: { xs: 2, sm: 2.5, md: 3 },
                   height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
@@ -274,27 +325,51 @@ export function ProjectsPage() {
                 }}
               >
                 {/* Header */}
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-                  <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'flex-start' }}>
-                    <Avatar sx={{ bgcolor: 'primary.main', width: 40, height: 40 }}>
+                <Box sx={{ 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'flex-start', 
+                  mb: { xs: 1.5, sm: 2 },
+                  gap: 1,
+                }}>
+                  <Box sx={{ display: 'flex', gap: { xs: 1, sm: 1.5 }, alignItems: 'flex-start', minWidth: 0 }}>
+                    <Avatar sx={{ 
+                      bgcolor: 'primary.main', 
+                      width: { xs: 36, sm: 40 }, 
+                      height: { xs: 36, sm: 40 },
+                      flexShrink: 0,
+                    }}>
                       <Folder />
                     </Avatar>
-                    <Box>
-                      <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+                    <Box sx={{ minWidth: 0 }}>
+                      <Typography 
+                        variant="subtitle1" 
+                        sx={{ 
+                          fontWeight: 600,
+                          fontSize: { xs: '0.95rem', sm: '1rem' },
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
                         {project.name}
                       </Typography>
                       {getStatusChip(project.status)}
                     </Box>
                   </Box>
                   {isAdmin && (
-                    <Box onClick={(e) => e.stopPropagation()}>
-                      <IconButton size="small" onClick={() => handleOpenDialog(project)}>
+                    <Box onClick={(e) => e.stopPropagation()} sx={{ display: 'flex', gap: 0 }}>
+                      <IconButton 
+                        size="small" 
+                        onClick={() => handleOpenDialog(project)}
+                        sx={{ minWidth: '36px', minHeight: '36px' }}
+                      >
                         <Edit fontSize="small" />
                       </IconButton>
                       <IconButton
                         size="small"
                         onClick={() => handleDeleteClick(project)}
-                        sx={{ color: 'error.main' }}
+                        sx={{ color: 'error.main', minWidth: '36px', minHeight: '36px' }}
                       >
                         <Delete fontSize="small" />
                       </IconButton>
@@ -307,7 +382,8 @@ export function ProjectsPage() {
                   variant="body2"
                   color="text.secondary"
                   sx={{
-                    mb: 2,
+                    mb: { xs: 1.5, sm: 2 },
+                    fontSize: { xs: '0.8rem', sm: '0.85rem' },
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     display: '-webkit-box',
@@ -320,28 +396,53 @@ export function ProjectsPage() {
                 </Typography>
 
                 {/* Technologies */}
-                <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap', mb: 2 }}>
+                <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap', mb: { xs: 1.5, sm: 2 } }}>
                   {project.technologies.slice(0, 4).map((tech) => (
                     <Chip
                       key={tech}
                       label={tech}
                       size="small"
                       variant="outlined"
-                      sx={{ fontSize: '0.7rem', height: 22 }}
+                      sx={{ 
+                        fontSize: { xs: '0.65rem', sm: '0.7rem' }, 
+                        height: { xs: 20, sm: 22 },
+                      }}
                     />
                   ))}
                   {project.technologies.length > 4 && (
                     <Chip
                       label={`+${project.technologies.length - 4}`}
                       size="small"
-                      sx={{ fontSize: '0.7rem', height: 22, bgcolor: 'action.hover' }}
+                      sx={{ 
+                        fontSize: { xs: '0.65rem', sm: '0.7rem' }, 
+                        height: { xs: 20, sm: 22 },
+                        bgcolor: 'action.hover' 
+                      }}
                     />
                   )}
                 </Box>
 
                 {/* Footer */}
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pt: 2, borderTop: 1, borderColor: 'divider' }}>
-                  <AvatarGroup max={4} sx={{ '& .MuiAvatar-root': { width: 28, height: 28, fontSize: '0.75rem' } }}>
+                <Box sx={{ 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center', 
+                  pt: { xs: 1.5, sm: 2 }, 
+                  borderTop: 1, 
+                  borderColor: 'divider',
+                  gap: 1,
+                  flexWrap: 'wrap',
+                }}>
+                  <AvatarGroup 
+                    max={3} 
+                    sx={{ 
+                      '& .MuiAvatar-root': { 
+                        width: { xs: 24, sm: 28 }, 
+                        height: { xs: 24, sm: 28 }, 
+                        fontSize: { xs: '0.65rem', sm: '0.75rem' } 
+                      } 
+                    }}
+                  >
                     {projectWorkers.map((worker) => (
                       <Tooltip key={worker!.id} title={worker!.name}>
                         <Avatar sx={{ bgcolor: 'primary.light' }}>{worker!.name.charAt(0)}</Avatar>

@@ -52,19 +52,41 @@ function StatCard({ title, value, icon, color, trend }: StatCardProps) {
   }, []);
 
   return (
-    <Card ref={cardRef} sx={{ p: 3, height: '100%' }} data-animate="card">
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+    <Card ref={cardRef} sx={{ p: { xs: 2, sm: 2.5, md: 3 }, height: '100%' }} data-animate="card">
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 1 }}>
         <Box>
-          <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+          <Typography 
+            variant="body2" 
+            color="text.secondary" 
+            sx={{ 
+              mb: 1,
+              fontSize: { xs: '0.75rem', sm: '0.85rem' },
+              fontWeight: 500,
+            }}
+          >
             {title}
           </Typography>
-          <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.5 }}>
+          <Typography 
+            variant="h4" 
+            sx={{ 
+              fontWeight: 700, 
+              mb: 0.5,
+              fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' },
+              wordBreak: 'break-word',
+            }}
+          >
             {value}
           </Typography>
           {trend && (
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-              <TrendingUp sx={{ fontSize: 16, color: 'success.main' }} />
-              <Typography variant="caption" color="success.main">
+              <TrendingUp sx={{ fontSize: { xs: 14, sm: 16 }, color: 'success.main' }} />
+              <Typography 
+                variant="caption" 
+                color="success.main"
+                sx={{
+                  fontSize: { xs: '0.7rem', sm: '0.8rem' },
+                }}
+              >
                 {trend}
               </Typography>
             </Box>
@@ -72,10 +94,12 @@ function StatCard({ title, value, icon, color, trend }: StatCardProps) {
         </Box>
         <Avatar
           sx={{
-            width: 48,
-            height: 48,
+            width: { xs: 40, sm: 48 },
+            height: { xs: 40, sm: 48 },
             bgcolor: `${color}20`,
             color: color,
+            flexShrink: 0,
+            fontSize: { xs: '1.2rem', sm: '1.5rem' },
           }}
         >
           {icon}
@@ -148,12 +172,24 @@ export function DashboardPage() {
     <Box ref={containerRef} sx={{ width: '100%' }}>
       {/* Export Buttons */}
       {isAdmin && (
-        <Box sx={{ display: 'flex', gap: 2, mb: 3, justifyContent: 'flex-end' }}>
+        <Box sx={{ 
+          display: 'flex', 
+          gap: { xs: 1, sm: 1.5 }, 
+          mb: { xs: 2, sm: 3 }, 
+          justifyContent: 'flex-end',
+          flexWrap: 'wrap',
+        }}>
           <Button
             variant="outlined"
             startIcon={<Download />}
             onClick={handleExportCSV}
             size="small"
+            sx={{
+              fontSize: { xs: '0.8rem', sm: '0.9rem' },
+              py: { xs: 0.8, sm: 1 },
+              px: { xs: 1.5, sm: 2 },
+              minHeight: '36px',
+            }}
           >
             Export CSV
           </Button>
@@ -162,6 +198,12 @@ export function DashboardPage() {
             startIcon={<Download />}
             onClick={handleExportJSON}
             size="small"
+            sx={{
+              fontSize: { xs: '0.8rem', sm: '0.9rem' },
+              py: { xs: 0.8, sm: 1 },
+              px: { xs: 1.5, sm: 2 },
+              minHeight: '36px',
+            }}
           >
             Export JSON
           </Button>
@@ -170,7 +212,7 @@ export function DashboardPage() {
 
       {/* Stats Grid */}
       <Box ref={cardsRef}>
-        <Grid container spacing={3} sx={{ mb: 4 }}>
+        <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} sx={{ mb: { xs: 3, sm: 4 } }}>
           <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
             <StatCard
               title="Total Projects"
@@ -210,11 +252,18 @@ export function DashboardPage() {
       </Box>
 
       {/* Charts Section */}
-      <Box ref={chartsRef} sx={{ mb: 4 }}>
-        <Typography variant="h5" sx={{ mb: 3, fontWeight: 600 }}>
+      <Box ref={chartsRef} sx={{ mb: { xs: 3, sm: 4 } }}>
+        <Typography 
+          variant="h5" 
+          sx={{ 
+            mb: { xs: 2, sm: 3 }, 
+            fontWeight: 600,
+            fontSize: { xs: '1.25rem', sm: '1.5rem' },
+          }}
+        >
           Analytics Overview
         </Typography>
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }}>
           <Grid size={{ xs: 12, lg: 6 }}>
             <SalaryTrendsChart />
           </Grid>
@@ -231,7 +280,7 @@ export function DashboardPage() {
       </Box>
 
       {/* Upcoming Events & Carousels */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} sx={{ mb: { xs: 3, sm: 4 } }}>
         <Grid size={{ xs: 12, lg: 4 }}>
           <UpcomingEventsWidget />
         </Grid>
@@ -244,37 +293,63 @@ export function DashboardPage() {
       </Grid>
 
       {/* Projects and Team Overview */}
-      <Grid container spacing={3}>
+      <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }}>
         {/* Recent Projects */}
         <Grid size={{ xs: 12, lg: 7 }}>
-          <Card sx={{ p: 3, height: '100%' }} data-animate="card">
-            <Typography variant="h6" sx={{ mb: 3, fontWeight: 600 }}>
+          <Card sx={{ p: { xs: 2, sm: 2.5, md: 3 }, height: '100%' }} data-animate="card">
+            <Typography 
+              variant="h6" 
+              sx={{ 
+                mb: { xs: 2, sm: 3 }, 
+                fontWeight: 600,
+                fontSize: { xs: '1rem', sm: '1.1rem' },
+              }}
+            >
               Recent Projects
             </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 1.5, sm: 2 } }}>
               {projects.slice(0, 4).map((project) => (
                 <Box
                   key={project.id}
                   sx={{
-                    p: 2,
+                    p: { xs: 1.5, sm: 2 },
                     borderRadius: 2,
                     bgcolor: 'background.default',
                     border: 1,
                     borderColor: 'divider',
                   }}
                 >
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1.5 }}>
-                    <Box>
-                      <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 0.5 }}>
+                  <Box sx={{ 
+                    display: 'flex', 
+                    justifyContent: 'space-between', 
+                    alignItems: 'flex-start', 
+                    mb: 1.5,
+                    gap: 1,
+                    flexWrap: 'wrap',
+                  }}>
+                    <Box sx={{ flex: 1, minWidth: '200px' }}>
+                      <Typography 
+                        variant="subtitle1" 
+                        sx={{ 
+                          fontWeight: 600, 
+                          mb: 0.5,
+                          fontSize: { xs: '0.95rem', sm: '1rem' },
+                        }}
+                      >
                         {project.name}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary" sx={{ 
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        display: '-webkit-box',
-                        WebkitLineClamp: 1,
-                        WebkitBoxOrient: 'vertical',
-                      }}>
+                      <Typography 
+                        variant="body2" 
+                        color="text.secondary" 
+                        sx={{ 
+                          fontSize: { xs: '0.8rem', sm: '0.85rem' },
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          display: '-webkit-box',
+                          WebkitLineClamp: 1,
+                          WebkitBoxOrient: 'vertical',
+                        }}
+                      >
                         {project.description}
                       </Typography>
                     </Box>
@@ -313,20 +388,39 @@ export function DashboardPage() {
 
         {/* Project Costs */}
         <Grid size={{ xs: 12, lg: 5 }}>
-          <Card sx={{ p: 3, height: '100%' }} data-animate="card">
-            <Typography variant="h6" sx={{ mb: 3, fontWeight: 600 }}>
+          <Card sx={{ p: { xs: 2, sm: 2.5, md: 3 }, height: '100%' }} data-animate="card">
+            <Typography 
+              variant="h6" 
+              sx={{ 
+                mb: { xs: 2, sm: 3 }, 
+                fontWeight: 600,
+                fontSize: { xs: '1rem', sm: '1.1rem' },
+              }}
+            >
               Project Costs
             </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, sm: 2.5 } }}>
               {projectCosts.slice(0, 5).map((cost) => {
                 const percentage = totalCost > 0 ? (cost.totalCost / totalCost) * 100 : 0;
                 return (
                   <Box key={cost.projectId}>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                      <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1, gap: 1, flexWrap: 'wrap' }}>
+                      <Typography 
+                        variant="body2" 
+                        sx={{ 
+                          fontWeight: 500,
+                          fontSize: { xs: '0.8rem', sm: '0.9rem' },
+                        }}
+                      >
                         {cost.projectName}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography 
+                        variant="body2" 
+                        color="text.secondary"
+                        sx={{
+                          fontSize: { xs: '0.8rem', sm: '0.9rem' },
+                        }}
+                      >
                         {formatCurrency(cost.totalCost)}
                       </Typography>
                     </Box>
@@ -334,7 +428,7 @@ export function DashboardPage() {
                       variant="determinate"
                       value={percentage}
                       sx={{
-                        height: 8,
+                        height: { xs: 6, sm: 8 },
                         borderRadius: 4,
                         bgcolor: 'action.hover',
                         '& .MuiLinearProgress-bar': {
@@ -351,16 +445,23 @@ export function DashboardPage() {
 
         {/* Team Overview */}
         <Grid size={{ xs: 12 }}>
-          <Card sx={{ p: 3 }} data-animate="card">
-            <Typography variant="h6" sx={{ mb: 3, fontWeight: 600 }}>
+          <Card sx={{ p: { xs: 2, sm: 2.5, md: 3 } }} data-animate="card">
+            <Typography 
+              variant="h6" 
+              sx={{ 
+                mb: { xs: 2, sm: 3 }, 
+                fontWeight: 600,
+                fontSize: { xs: '1rem', sm: '1.1rem' },
+              }}
+            >
               Team Overview
             </Typography>
-            <Grid container spacing={2}>
+            <Grid container spacing={{ xs: 1.5, sm: 2 }}>
               {workers.slice(0, 6).map((worker) => (
-                <Grid size={{ xs: 12, sm: 6, md: 4, lg: 2 }} key={worker.id}>
+                <Grid size={{ xs: 6, sm: 4, md: 3, lg: 2 }} key={worker.id}>
                   <Box
                     sx={{
-                      p: 2,
+                      p: { xs: 1.5, sm: 2 },
                       borderRadius: 2,
                       bgcolor: 'background.default',
                       border: 1,

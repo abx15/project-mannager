@@ -103,33 +103,66 @@ function MetricCard({ title, value, change, icon, color }: MetricCardProps) {
   const isPositive = change >= 0;
 
   return (
-    <Card ref={cardRef} sx={{ p: 3, cursor: 'pointer' }} data-animate="card">
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+    <Card ref={cardRef} sx={{ p: { xs: 2, sm: 2.5, md: 3 }, cursor: 'pointer' }} data-animate="card">
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 1 }}>
         <Box>
-          <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+          <Typography 
+            variant="body2" 
+            color="text.secondary" 
+            sx={{ 
+              mb: 1,
+              fontSize: { xs: '0.75rem', sm: '0.85rem' },
+              fontWeight: 500,
+            }}
+          >
             {title}
           </Typography>
-          <Typography variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
+          <Typography 
+            variant="h4" 
+            sx={{ 
+              fontWeight: 700, 
+              mb: 1,
+              fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' },
+              wordBreak: 'break-word',
+            }}
+          >
             {value}
           </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, flexWrap: 'wrap' }}>
             {isPositive ? (
-              <TrendingUp sx={{ fontSize: 16, color: 'success.main' }} />
+              <TrendingUp sx={{ fontSize: { xs: 14, sm: 16 }, color: 'success.main' }} />
             ) : (
-              <TrendingDown sx={{ fontSize: 16, color: 'error.main' }} />
+              <TrendingDown sx={{ fontSize: { xs: 14, sm: 16 }, color: 'error.main' }} />
             )}
             <Typography
               variant="caption"
-              sx={{ color: isPositive ? 'success.main' : 'error.main', fontWeight: 600 }}
+              sx={{ 
+                color: isPositive ? 'success.main' : 'error.main', 
+                fontWeight: 600,
+                fontSize: { xs: '0.7rem', sm: '0.8rem' },
+              }}
             >
               {isPositive ? '+' : ''}{change}%
             </Typography>
-            <Typography variant="caption" color="text.secondary">
+            <Typography 
+              variant="caption" 
+              color="text.secondary"
+              sx={{
+                fontSize: { xs: '0.7rem', sm: '0.8rem' },
+              }}
+            >
               vs last month
             </Typography>
           </Box>
         </Box>
-        <Avatar sx={{ width: 48, height: 48, bgcolor: `${color}20`, color: color }}>
+        <Avatar sx={{ 
+          width: { xs: 40, sm: 48 }, 
+          height: { xs: 40, sm: 48 }, 
+          bgcolor: `${color}20`, 
+          color: color,
+          flexShrink: 0,
+          fontSize: { xs: '1.2rem', sm: '1.5rem' },
+        }}>
           {icon}
         </Avatar>
       </Box>
@@ -229,15 +262,29 @@ export function AnalyticsPage() {
 
   return (
     <Box ref={containerRef} sx={{ width: '100%' }}>
-      <Typography variant="h4" sx={{ mb: 1, fontWeight: 700 }}>
+      <Typography 
+        variant="h4" 
+        sx={{ 
+          mb: 1, 
+          fontWeight: 700,
+          fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' },
+        }}
+      >
         Analytics Dashboard
       </Typography>
-      <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
+      <Typography 
+        variant="body1" 
+        color="text.secondary" 
+        sx={{ 
+          mb: { xs: 3, sm: 4 },
+          fontSize: { xs: '0.85rem', sm: '0.95rem' },
+        }}
+      >
         Comprehensive insights into your team performance and budget allocation
       </Typography>
 
       {/* Metric Cards */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }} sx={{ mb: { xs: 3, sm: 4 } }}>
         <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <MetricCard
             title="Total Monthly Cost"
@@ -277,19 +324,33 @@ export function AnalyticsPage() {
       </Grid>
 
       {/* Charts Row 1 */}
-      <Box ref={chartsRef1} sx={{ mb: 4 }}>
-        <Typography variant="h5" sx={{ mb: 3, fontWeight: 600 }}>
+      <Box ref={chartsRef1} sx={{ mb: { xs: 3, sm: 4 } }}>
+        <Typography 
+          variant="h5" 
+          sx={{ 
+            mb: { xs: 2, sm: 3 }, 
+            fontWeight: 600,
+            fontSize: { xs: '1.25rem', sm: '1.5rem' },
+          }}
+        >
           Financial Overview
         </Typography>
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 2, sm: 2.5, md: 3 }}>
           <Grid size={{ xs: 12, lg: 8 }}>
-            <Card sx={{ p: 3, height: '100%' }}>
-              <Typography variant="h6" sx={{ mb: 3, fontWeight: 600 }}>
+            <Card sx={{ p: { xs: 2, sm: 2.5, md: 3 }, height: '100%' }}>
+              <Typography 
+                variant="h6" 
+                sx={{ 
+                  mb: { xs: 2, sm: 3 }, 
+                  fontWeight: 600,
+                  fontSize: { xs: '0.95rem', sm: '1.1rem' },
+                }}
+              >
                 Monthly Salary Trends & Forecast
               </Typography>
-              <Box sx={{ width: '100%', height: 320 }}>
+              <Box sx={{ width: '100%', height: { xs: 250, sm: 300, md: 320 } }}>
                 <ResponsiveContainer>
-                  <ComposedChart data={monthlyTrends} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                  <ComposedChart data={monthlyTrends} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                     <defs>
                       <linearGradient id="actualGradient" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="5%" stopColor="hsl(173, 80%, 40%)" stopOpacity={0.3} />

@@ -57,11 +57,14 @@ export function AppLayout() {
   const location = useLocation();
   const muiTheme = useMuiTheme();
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
+  const isSmallMobile = useMediaQuery(muiTheme.breakpoints.down('sm'));
   const sidebarRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const isCollapsed = settings.sidebarCollapsed || isMobile;
-  const drawerWidth = isCollapsed ? SIDEBAR_COLLAPSED_WIDTH : SIDEBAR_WIDTH;
+  // On mobile, always collapse sidebar. On desktop, use settings
+  const isCollapsed = isMobile || (settings.sidebarCollapsed && !isMobile);
+  const drawerWidth = isCollapsed ? (isMobile ? 0 : SIDEBAR_COLLAPSED_WIDTH) : SIDEBAR_WIDTH;
+  const shouldHideSidebarMobile = isMobile && !isCollapsed;
 
   useEffect(() => {
     if (sidebarRef.current) {
@@ -89,32 +92,37 @@ export function AppLayout() {
 
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh', width: '100%', bgcolor: 'background.default' }}>
-      {/* Sidebar */}
+      {/* Sidebar - Hidden on mobile by default */}
       <Drawer
-        variant="permanent"
+        variant={isMobile ? 'temporary' : 'permanent'}
         ref={sidebarRef}
         sx={{
           width: drawerWidth,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: drawerWidth,
+            width: drawerWidth || 'auto',
             boxSizing: 'border-box',
             bgcolor: 'hsl(222, 47%, 11%)',
             borderRight: '1px solid hsl(222, 40%, 20%)',
             transition: 'width 0.3s ease',
             overflowX: 'hidden',
+            '@media (max-width: 768px)': {
+              position: 'fixed',
+              height: '100vh',
+              zIndex: 1200,
+            },
           },
         }}
       >
         {/* Logo */}
         <Box
           sx={{
-            p: 2,
+            p: { xs: 1.5, sm: 2 },
             display: 'flex',
             alignItems: 'center',
             justifyContent: isCollapsed ? 'center' : 'space-between',
             borderBottom: '1px solid hsl(222, 40%, 20%)',
-            minHeight: 64,
+            minHeight: { xs: 56, sm: 64 },
           }}
         >
           {!isCollapsed && (
@@ -123,24 +131,28 @@ export function AppLayout() {
               sx={{
                 color: '#fff',
                 fontWeight: 700,
+                fontSize: { xs: '0.95rem', sm: '1.1rem' },
                 background: 'linear-gradient(135deg, hsl(173, 80%, 45%), hsl(195, 80%, 50%))',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
+                whiteSpace: 'nowrap',
               }}
             >
               WorkLedger
             </Typography>
           )}
-          <IconButton
-            onClick={toggleSidebar}
-            sx={{ color: 'hsl(210, 20%, 70%)', '&:hover': { color: '#fff' } }}
-          >
-            {isCollapsed ? <ChevronRight /> : <ChevronLeft />}
-          </IconButton>
+          {!isMobile && (
+            <IconButton
+              onClick={toggleSidebar}
+              sx={{ color: 'hsl(210, 20%, 70%)', '&:hover': { color: '#fff' } }}
+            >
+              {isCollapsed ? <ChevronRight /> : <ChevronLeft />}
+            </IconButton>
+          )}
         </Box>
 
         {/* Navigation */}
-        <List sx={{ px: 1.5, py: 2, flex: 1 }}>
+        <List sx={{ px: { xs: 1, sm: 1.5 }, py: 1.5, flex: 1 }}>
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (
@@ -156,11 +168,12 @@ export function AppLayout() {
                   sx={{
                     borderRadius: 2,
                     mb: 0.5,
-                    px: isCollapsed ? 2 : 2.5,
-                    py: 1.5,
+                    px: isCollapsed ? { xs: 1.5, sm: 2 } : { xs: 2, sm: 2.5 },
+                    py: { xs: 1.2, sm: 1.5 },
                     justifyContent: isCollapsed ? 'center' : 'flex-start',
                     bgcolor: isActive ? 'hsl(173, 80%, 40%)' : 'transparent',
                     color: isActive ? '#fff' : 'hsl(210, 20%, 70%)',
+                    fontSize: { xs: '0.85rem', sm: '0.95rem' },
                     '&:hover': {
                       bgcolor: isActive ? 'hsl(173, 80%, 35%)' : 'hsl(222, 40%, 18%)',
                       color: '#fff',
@@ -171,7 +184,8 @@ export function AppLayout() {
                   <ListItemIcon
                     sx={{
                       color: 'inherit',
-                      minWidth: isCollapsed ? 0 : 40,
+                      minWidth: isCollapsed ? 0 : { xs: 36, sm: 40 },
+                      fontSize: { xs: '1.3rem', sm: '1.5rem' },
                     }}
                   >
                     {item.icon}
@@ -186,7 +200,7 @@ export function AppLayout() {
         {/* User section */}
         <Box
           sx={{
-            p: 2,
+            p: { xs: 1.5, sm: 2 },
             borderTop: '1px solid hsl(222, 40%, 20%)',
             display: 'flex',
             alignItems: 'center',
@@ -195,25 +209,40 @@ export function AppLayout() {
         >
           <Avatar
             sx={{
-              width: 36,
-              height: 36,
+              width: { xs: 32, sm: 36 },
+              height: { xs: 32, sm: 36 },
               bgcolor: 'hsl(173, 80%, 40%)',
-              fontSize: '0.875rem',
+              fontSize: { xs: '0.75rem', sm: '0.875rem' },
             }}
           >
             {user?.name?.charAt(0) || 'U'}
           </Avatar>
           {!isCollapsed && (
-            <Box sx={{ flex: 1, overflow: 'hidden' }}>
+            <Box sx={{ flex: 1, overflow: 'hidden', minWidth: 0 }}>
               <Typography
                 variant="body2"
-                sx={{ color: '#fff', fontWeight: 500, whiteSpace: 'nowrap' }}
+                sx={{ 
+                  color: '#fff', 
+                  fontWeight: 500, 
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  fontSize: { xs: '0.8rem', sm: '0.9rem' },
+                }}
               >
                 {user?.name}
               </Typography>
               <Typography
                 variant="caption"
-                sx={{ color: 'hsl(210, 20%, 60%)', textTransform: 'capitalize' }}
+                sx={{ 
+                  color: 'hsl(210, 20%, 60%)', 
+                  textTransform: 'capitalize',
+                  fontSize: { xs: '0.65rem', sm: '0.75rem' },
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                  display: 'block',
+                }}
               >
                 {user?.role}
               </Typography>
@@ -223,7 +252,12 @@ export function AppLayout() {
             <IconButton
               onClick={logout}
               size="small"
-              sx={{ color: 'hsl(210, 20%, 60%)', '&:hover': { color: 'hsl(0, 84%, 60%)' } }}
+              sx={{ 
+                color: 'hsl(210, 20%, 60%)', 
+                '&:hover': { color: 'hsl(0, 84%, 60%)' },
+                minWidth: '40px',
+                minHeight: '40px',
+              }}
             >
               <Logout fontSize="small" />
             </IconButton>
@@ -239,8 +273,11 @@ export function AppLayout() {
           display: 'flex',
           flexDirection: 'column',
           minHeight: '100vh',
-          width: `calc(100% - ${drawerWidth}px)`,
+          width: isMobile ? '100%' : `calc(100% - ${drawerWidth}px)`,
           transition: 'width 0.3s ease',
+          '@media (max-width: 768px)': {
+            marginLeft: 0,
+          },
         }}
       >
         <Topbar />
@@ -248,9 +285,12 @@ export function AppLayout() {
           ref={contentRef}
           sx={{
             flex: 1,
-            p: { xs: 2, sm: 3 },
+            p: { xs: 1.5, sm: 2, md: 3 },
             overflowY: 'auto',
             width: '100%',
+            '@media (max-width: 480px)': {
+              p: 1,
+            },
           }}
         >
           <Outlet />

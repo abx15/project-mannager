@@ -190,8 +190,22 @@ export function WorkersPage() {
   return (
     <Box ref={pageRef} sx={{ width: '100%' }}>
       {/* Header */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3, flexWrap: 'wrap', gap: 2 }}>
-        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+      <Box sx={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'flex-start', 
+        mb: { xs: 2, sm: 3 }, 
+        flexWrap: 'wrap', 
+        gap: { xs: 1.5, sm: 2 },
+      }}>
+        <Box sx={{ 
+          display: 'flex', 
+          gap: { xs: 1, sm: 2 }, 
+          alignItems: 'center',
+          width: { xs: '100%', sm: 'auto' },
+          flex: 1,
+          flexWrap: 'wrap',
+        }}>
           <TextField
             placeholder="Search team members..."
             size="small"
@@ -200,27 +214,45 @@ export function WorkersPage() {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <Search sx={{ color: 'text.secondary' }} />
+                  <Search sx={{ color: 'text.secondary', fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
                 </InputAdornment>
               ),
             }}
-            sx={{ minWidth: 250 }}
+            sx={{ 
+              flex: 1,
+              minWidth: { xs: '100%', sm: '200px' },
+              '& .MuiOutlinedInput-root': {
+                fontSize: { xs: '0.85rem', sm: '0.95rem' },
+              },
+            }}
           />
           <ToggleButtonGroup
             value={viewMode}
             exclusive
             onChange={(_, value) => value && setViewMode(value)}
             size="small"
+            sx={{
+              '& .MuiToggleButton-root': {
+                fontSize: { xs: '0.75rem', sm: '0.9rem' },
+                py: { xs: 0.5, sm: 0.75 },
+                px: { xs: 0.75, sm: 1 },
+              },
+            }}
           >
-            <ToggleButton value="grid">
+            <ToggleButton value="grid" sx={{ minWidth: '36px', minHeight: '36px' }}>
               <GridView />
             </ToggleButton>
-            <ToggleButton value="list">
+            <ToggleButton value="list" sx={{ minWidth: '36px', minHeight: '36px' }}>
               <ViewList />
             </ToggleButton>
           </ToggleButtonGroup>
         </Box>
-        <Box sx={{ display: 'flex', gap: 1 }}>
+        <Box sx={{ 
+          display: 'flex', 
+          gap: { xs: 0.5, sm: 1 },
+          flexWrap: 'wrap',
+          width: { xs: '100%', sm: 'auto' },
+        }}>
           {isAdmin && (
             <>
               <Button
@@ -228,6 +260,13 @@ export function WorkersPage() {
                 startIcon={<Download />}
                 onClick={() => exportToCSV(workers, 'workers')}
                 size="small"
+                sx={{
+                  fontSize: { xs: '0.75rem', sm: '0.9rem' },
+                  py: { xs: 0.8, sm: 1 },
+                  px: { xs: 1, sm: 1.5 },
+                  minHeight: '36px',
+                  flex: { xs: 1, sm: 'auto' },
+                }}
               >
                 CSV
               </Button>
@@ -236,6 +275,13 @@ export function WorkersPage() {
                 startIcon={<Download />}
                 onClick={() => exportToJSON(workers, 'workers')}
                 size="small"
+                sx={{
+                  fontSize: { xs: '0.75rem', sm: '0.9rem' },
+                  py: { xs: 0.8, sm: 1 },
+                  px: { xs: 1, sm: 1.5 },
+                  minHeight: '36px',
+                  flex: { xs: 1, sm: 'auto' },
+                }}
               >
                 JSON
               </Button>
@@ -245,6 +291,11 @@ export function WorkersPage() {
                 onClick={() => handleOpenDialog()}
                 sx={{
                   background: 'linear-gradient(135deg, hsl(173, 80%, 40%), hsl(195, 80%, 45%))',
+                  fontSize: { xs: '0.75rem', sm: '0.9rem' },
+                  py: { xs: 0.8, sm: 1 },
+                  px: { xs: 1.5, sm: 2 },
+                  minHeight: '36px',
+                  flex: { xs: 1, sm: 'auto' },
                   '&:hover': {
                     background: 'linear-gradient(135deg, hsl(173, 80%, 35%), hsl(195, 80%, 40%))',
                   },
