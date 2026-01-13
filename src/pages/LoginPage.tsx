@@ -172,7 +172,7 @@ export function LoginPage() {
             Demo Credentials
           </Typography>
           <Box sx={{ display: 'flex', gap: 1.5 }}>
-            <Button
+            {/* <Button
               variant="outlined"
               size="small"
               fullWidth
@@ -180,7 +180,7 @@ export function LoginPage() {
               sx={{ fontSize: '0.75rem' }}
             >
               Admin Login
-            </Button>
+            </Button> */}
             <Button
               variant="outlined"
               size="small"
@@ -192,9 +192,9 @@ export function LoginPage() {
             </Button>
           </Box>
           <Box sx={{ mt: 2, textAlign: 'center' }}>
-            <Typography variant="caption" color="text.secondary">
+            {/* <Typography variant="caption" color="text.secondary">
               Admin: admin@workledger.com / admin123
-            </Typography>
+            </Typography> */}
             <br />
             <Typography variant="caption" color="text.secondary">
               User: user@workledger.com / user123
