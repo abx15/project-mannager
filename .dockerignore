@@ -1,0 +1,15 @@
+node_modules
+dist
+.git
+.github
+.env
+.env.local
+.DS_Store
+Dockerfile
+.dockerignore
+vercel.json
+README.md
+LICENSE
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+SECURITY.md
